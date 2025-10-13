@@ -7,16 +7,22 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Item_Servico")
+@Table(name = "item_servico")
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemServico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
-    private int id_servico;
+
+    @ManyToOne
+    @JoinColumn(name = "id_servico")
+    private Servico servico;
+
     private String descricao;
+
     private int quantidade;
+
     private float valor_unitario;
 
     public UUID getId() {
@@ -27,12 +33,12 @@ public class ItemServico {
         this.id = id;
     }
 
-    public int getId_servico() {
-        return id_servico;
+    public Servico getServico() {
+        return servico;
     }
 
-    public void setId_servico(int id_servico) {
-        this.id_servico = id_servico;
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
     public String getDescricao() {
@@ -58,4 +64,5 @@ public class ItemServico {
     public void setValor_unitario(float valor_unitario) {
         this.valor_unitario = valor_unitario;
     }
+
 }
