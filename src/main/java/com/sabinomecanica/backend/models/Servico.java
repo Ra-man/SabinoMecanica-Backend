@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,7 +25,14 @@ public class Servico {
 
     private String descricao;
 
-    private float valor_total;
+    private double valor_total;
+
+    @OneToMany(mappedBy = "servico")
+    private List<ItemServico> itensServico;
+
+    public List<ItemServico> getItemServicos() {
+        return itensServico;
+    }
 
     @ManyToOne
     @JoinColumn(name = "id_carro", nullable = false)
@@ -80,11 +88,11 @@ public class Servico {
         this.descricao = descricao;
     }
 
-    public float getValor_total() {
+    public double getValor_total() {
         return valor_total;
     }
 
-    public void setValor_total(float valor_total) {
+    public void setValor_total(double valor_total) {
         this.valor_total = valor_total;
     }
 
